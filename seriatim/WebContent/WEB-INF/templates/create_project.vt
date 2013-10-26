@@ -1,0 +1,16 @@
+#set($title="Create A Project")
+#set($useEditor=true)
+#macro(content)
+<form method="post" action="$absolute_uri/add_project" id="mainform">
+	<p>
+		<label for="title">Title:</label>
+		<input type="text" name="title" id="title" size="60"/>
+		<br/>
+		<label for="body">Description:</label>
+		<textarea name="body" id="body" cols="60" rows="15"></textarea>
+		<br/>
+		<input type="submit" value="Create Project"/>
+	</p>
+</form>
+#end
+#parse('frag/main.vt')

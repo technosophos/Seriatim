@@ -1,0 +1,7 @@
+#**
+Core macros that are used repeatedly.
+
+This should be loaded from commands.xml
+
+@author mbutcher
+*#

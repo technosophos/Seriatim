@@ -1,0 +1,47 @@
+<html>
+<head>
+  <title>Seriatim</title>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/jquery.ui.js"></script>
+  <script type="text/javascript" src="js/seriatim.js"></script>
+    
+</head>
+<body>
+<div id="navigation">
+$('document').ready(function() {
+  $('#date').datepicker({ 
+    showOn: 'both', 
+    showOtherMonths: true, 
+		showWeeks: true, 
+    firstDay: 1, 
+    changeFirstDay: false,
+		buttonImageOnly: true, 
+    buttonImage: '../datepicker/img/calendar.gif'
+  });	
+});
+</div>
+<div id="content">
+  <h1>Time Entry</h1>
+  <form>
+    <ul>
+      <li>
+        <label for="date">Date:</label>
+        <input type="text" name="date" id="date"/>
+      </li>
+      <li>
+        <label for="title">Title:</label>
+        <input type="text" name="title"/>
+      </li>
+      <li>
+        <label for="short_desc">Short Description</label>
+        <textarea name="short_desc"></textarea>
+      </li>
+      <li>
+        <label for="long_desc">Long Description</label>
+        <textarea name="long_desc"></textarea>
+      </li>
+    </ul>
+  </form>
+</div>
+</body>
+</html>

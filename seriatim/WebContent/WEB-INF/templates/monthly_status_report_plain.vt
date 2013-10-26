@@ -1,0 +1,43 @@
+#**
+Monthly report generator.
+*#
+#set($title=$!MonthlyStatusReport.getTitle())
+#set($customJS = [
+  "$resource_uri/js/jquery.metadata.js",
+  "$resource_uri/js/jquery.tablesorter.min.js"
+])
+#set($customCSS = [
+  "$resource_uri/css/tablesorter.css"
+])
+#macro(content)
+	##if($MonthlyStatusReport.size() > 0)
+	    <script>
+	    $(document).ready(function() {
+	      $('#monthlyStatusReport').tablesorter();
+	    });
+	    </script>
+		<h1>$title</h1>
+		<h2 class="reportHeader">$MonthlyStatusReport.Subtitle</h2>
+		<h2 class="reportHeader">
+		#set($date = $!MonthlyStatusReport.PeriodStart)
+		#set($mo = $!tpl.ts2Date($date, 'M'))
+		#set($yr = $!tpl.ts2Date($date, 'yyyy'))
+		$!tpl.ts2Date($date, 'MMMMM yyyy')
+		</h2>
+		
+		<p>
+		#foreach($entry in $MonthlyStatusReport.ReportItems)
+		    ##set($parent = $!ser.getParent($ListProjects, $entry.DocID).getMetadatum('title').FirstValue)
+			$!tpl.ts2Date($entry.getMetadatum('date').FirstValue, 'MM/dd/yyyy'): $entry.getMetadatum('time').FirstValue &ndash; $entry.getMetadatum('title').FirstValue<br/>
+		#end
+		</p>
+		
+		#set($totalHours = $MonthlyStatusReport.Total.getMetadatum("time").FirstValue)
+		Total: $totalHours
+		<p><a href="$absolute_uri/monthly_status_report?month=$mo&year=$yr"/>Back to main report</a></p>
+	##else
+	##	<h1>Report Not Found</h1>
+	##	<p>There were probably no time entries for this month.</p>
+	##end ## IF MonthlyStatusReport > 0
+#end
+#parse('frag/main.vt')

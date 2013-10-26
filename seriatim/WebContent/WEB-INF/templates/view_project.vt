@@ -1,0 +1,24 @@
+#set($title=$ViewProject.getMetadatum('title').FirstValue)
+#macro(content)
+	<h1>$title</h1>
+	<div id="bodySection">
+	$ViewProject.Data
+	</div>
+	<p><a href="$absolute_uri/create_entry?doc=$ViewProject.DocID">&raquo;New Time Entry</a>
+	#set($entries=$ListEntriesByProject)
+	<p>
+	Total Entries: $entries.size()
+	</p>
+	#if($entries.size() > 0)
+		<ul>
+		#foreach($entry in $entries)
+			<li>
+			$tpl.ts2Date($entry.getMetadatum('date').FirstValue,'MM/dd/yyyy'):
+			<a href="$absolute_uri/entry?doc=$entry.DocID"
+			 >$entry.getMetadatum('title').FirstValue</a>
+			 ($entry.getMetadatum('time').FirstValue)</li>
+		#end
+		</ul>
+	#end
+#end
+#parse('frag/main.vt')

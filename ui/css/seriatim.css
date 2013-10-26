@@ -1,0 +1,82 @@
+#toolbar {
+	float:right;
+	position:fixed;
+	top: 3px;
+	right: 5px;
+}
+#logosection {
+	float: left;
+	
+}
+div.blankrule {
+	display: block;
+	clear: both;
+	/*border: 1px solid red;*/
+	border-bottom: 2px solid green;
+}
+
+#navmenu {
+  float:left;
+  list-style: none;
+  padding-left: 0px;
+  margin-left: 5px;
+}
+
+#navmenu > li > a {
+  display: block;
+  background-color: lightgreen;
+  border: 1px solid lightgreen;
+  text-decoration: None;
+  color: green;
+  font-weight: bold;
+  padding: 3px 5px 0px 5px;
+  margin-bottom: 4px;
+  list-style: none;
+}
+
+#navmenu > li > a:hover {
+  display: block;
+  background-color: lightgreen;
+  border: 1px solid green;
+}
+
+#content {
+  clear: right;
+  float: left;
+  padding: 5px 5px 5px 5px;
+}
+
+#footer {
+	color: gray;
+	background-color: lightgreen;
+	padding: 5px;
+}
+
+ul.formlist {
+	list-style: none;
+	padding: 0px;
+	margin: 3px;
+}
+
+ul.formlist > li {
+	padding-bottom: 9px;
+}
+
+ul.formlist label {
+	margin-left: 5px;
+}
+
+ul.formlist label:first {
+	text-decoration: underline;
+}
+
+label {
+ display: block; 
+}
+
+/*
+ * Override calendar styles:
+ */
+.datepicker_control {
+	background-color: green;
+}

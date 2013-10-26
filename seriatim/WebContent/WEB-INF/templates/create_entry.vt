@@ -1,0 +1,46 @@
+#set($title="Create An Entry")
+#set($useEditor=true)
+#macro(content)
+
+#if($tpl.ne($GetParent) && $GetParent.size() > 0 )#set($ViewProject = $GetParent.get(0))#end
+<form method="post" id="mainform" 
+#if($tpl.ne($ViewEntry)) 
+  action="$absolute_uri/save_modified_entry">
+  <input type="hidden" name="doc" value="$ViewEntry.DocID"/>
+#else
+   action="$absolute_uri/add_entry">
+#end
+	<h3>Add a new entry for $!ViewProject.getMetadatum('title').FirstValue</h3>
+	<input type="hidden" name="project" value="$ViewProject.DocID"/>
+	<p>
+		<label for="title">Title:</label>
+		<input type="text" name="title" id="title" size="60" value="$!ViewEntry.getMetadatum('title').FirstValue"/>
+		<br/>
+		<label for="title">Time:</label>
+		<input type="text" name="time" id="time" size="7" value="$!ViewEntry.getMetadatum('time').FirstValue"/>
+		<br/>
+		<label for="title">Date:</label>
+		<input type="text" name="date" id="date" value="$!tpl.ts2Date($ViewEntry.getMetadatum('date').FirstValue,'MM/dd/yyyy')"/>
+		<br/>
+		<label for="body">Description:</label>
+		<textarea name="body" id="body" cols="60" rows="15">$!ViewEntry.getData()</textarea>
+		<br/>
+		<label for="note">Internal Note:</label>
+		<textarea name="note" id="note" cols="60" rows="15">$!ViewEntry.getMetadatum('time').FirstValue</textarea>
+		<br/>
+		<input type="submit" value="Create Entry"/>
+	</p>
+</form>
+<script type="text/javascript">
+$('#date').datepicker({ 
+    showOn: 'both', 
+    showOtherMonths: true, 
+    showWeeks: true, 
+    firstDay: 1, 
+    changeFirstDay: false,
+    buttonImageOnly: true, 
+    buttonImage: '$resource_uri/datepicker/img/calendar2.gif'
+});
+</script>
+#end
+#parse('frag/main.vt')

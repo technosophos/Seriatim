@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commands>
+	<!-- Generic Installation Commands -->
+	<loadclass name="VerifyEnv"       class="com.technosophos.rhizome.web.command.VerifyEnvironment" />
+	<loadclass name="InstallBase"     class="com.technosophos.rhizome.web.command.InstallBase" />
+	<loadclass name="InstallRedirect" class="com.technosophos.rhizome.web.command.InstallRedirect"/>
+	<loadclass name="CreateSeriatimRepository" class="com.technosophos.seriatim.command.admin.CreateSeriatimRepository"/>
+	
+	<!-- User admin commands -->
+	<loadclass name="AddUser" class="com.technosophos.rhizome.web.command.user.AddUser"/>
+
+	<!-- Auth Commands -->
+	<loadclass name="AuthN" class="com.technosophos.rhizome.web.command.auth.BasicRepositoryAuthN"/>
+	<loadclass name="AuthNLogout" class="com.technosophos.rhizome.web.command.auth.BasicRepositoryAuthNLogout"/>
+	<loadclass name="RequireAuthN" class="com.technosophos.rhizome.web.command.auth.BasicRepositoryRequireAuthN"/>
+	
+	<loadclass name="AddProject" class="com.technosophos.seriatim.command.project.AddProject"/>
+	<loadclass name="ModifyProject" class="com.technosophos.seriatim.command.project.ModifyProject"/>
+	<loadclass name="ViewProject" class="com.technosophos.seriatim.command.project.ViewProject"/>
+	<loadclass name="ListProjects" class="com.technosophos.seriatim.command.project.ListProjects"/>
+	
+	
+	<loadclass name="AddEntry" class="com.technosophos.seriatim.command.entry.AddEntry"/>
+	<loadclass name="ModifyEntry" class="com.technosophos.seriatim.command.entry.ModifyEntry"/>
+	<loadclass name="ViewEntry" class="com.technosophos.seriatim.command.entry.ViewEntry"/>
+	<loadclass name="ListEntriesByProject" class="com.technosophos.seriatim.command.entry.ListEntriesByProject"/>
+	<loadclass name="ListEntries" class="com.technosophos.seriatim.command.entry.ListEntries"/>
+	<loadclass name="GetParent" class="com.technosophos.seriatim.command.entry.GetParent"/>
+	
+	<loadclass name="MonthlyStatusReport" class="com.technosophos.seriatim.command.reports.MonthlyStatusReport"/>
+
+
+	<!-- loadclass name="RebuildIndex"     class="com.technosophos.rhizome.web.commands.admin.RebuildIndex" / -->	
+
+	<!-- View Layer Commands -->
+	<loadclass name="template" class="com.technosophos.seriatim.command.template.DoSeriatimTemplate"/>
+
+	<!-- To Be Removed -->
+	<loadclass name="DumpConfiguration" class="com.technosophos.rhizome.command.util.DumpConfiguration"/>
+	<loadclass name="GetDocument"     class="com.technosophos.rhizome.command.GetDocument"/>
+	
+	<requests>
+		<global>
+			<param name="base_path">
+				<value><?path base_path ?></value>
+			</param>
+			<param name="template_path">
+				<value><?path config_path?>templates/</value>
+			</param>
+			<param name="template_macro">
+				<value>frag/coremacros.vt</value>
+			</param>
+			<param name="real_css_path">
+				<value><?path resource_path?>css/</value>
+			</param>
+			<param name="base_url">
+				<value><?path url?></value>
+			</param>
+		</global>
+		<group name="nav">
+			<cmd do="RequireAuthN" fatal="true"/>
+			<cmd do="ListProjects"/>
+			<cmd do="ListEntries">
+				<param name="max_docs">10</param>
+				<param name="sort_on">date</param>
+			</cmd>
+		</group>
+		<request name="install">
+			<cmd do="VerifyEnv" fatal="true"/>
+			<cmd do="InstallBase" fatal="true"/>
+			<cmd do="CreateSeriatimRepository"/>
+			<cmd do="template">
+				<param name="template_name">install.vt</param>
+			</cmd>
+		</request>
+		<request name="install2">
+			<cmd do="AddUser">
+				<param name="default_role">admin</param>
+			</cmd>
+			<cmd do="template">
+				<param name="template_name">install2.vt</param>
+			</cmd>
+		</request>
+		<request name="default">
+			<cmd do="RequireAuthN" fatal="true"/>
+			<cmd do="ListProjects"/>
+			<cmd do="ListEntries">
+				<param name="max_docs">10</param>
+				<param name="sort_on">date</param>
+			</cmd>
+			<cmd do="template">
+				<param name="template_name">default.vt</param>
+			</cmd>
+		</request>
+		<request name="login">
+			<cmd do="AuthN" prefix="auth-">
+				<param name="auth_failed">default</param>
+			</cmd>
+		</request>
+		<request name="logout">
+			<cmd do="AuthNLogout">
+				<param name="auth">default</param>
+			</cmd>
+		</request>
+		
+		<request name="create_project">
+		    <cmd group="nav"/>
+			<cmd do="template">
+				<param name="template_name">create_project.vt</param>
+			</cmd>
+		</request>
+		<request name="add_project">
+		    <cmd group="nav"/>
+			<cmd do="AddProject"/>
+			<cmd do="ViewProject"/>
+			<cmd do="template">
+				<param name="template_name">view_project.vt</param>
+			</cmd>
+		</request>
+		<request name="project">
+		    <cmd group="nav"/>
+			<cmd do="ViewProject"/>
+			<cmd do="ListEntriesByProject"/>
+			<cmd do="template">
+				<param name="template_name">view_project.vt</param>
+			</cmd>
+		</request>
+		<request name="projects">
+		    <cmd group="nav"/>
+			<!-- cmd do="ListProjects"/ -->
+			<cmd do="template">
+				<param name="template_name">list_projects.vt</param>
+			</cmd>
+		</request>
+		
+		<request name="create_entry">
+		    <cmd group="nav"/>
+			<cmd do="ViewProject"/>
+			<cmd do="template">
+				<param name="template_name">create_entry.vt</param>
+			</cmd>
+		</request>
+		<request name="modify_entry">
+		    <cmd group="nav"/>
+		    <cmd do="ViewEntry"/>
+		    <cmd do="GetParent"/>
+			<cmd do="template">
+				<param name="template_name">create_entry.vt</param>
+			</cmd>
+		</request>
+		<request name="add_entry">
+		    <cmd group="nav"/>
+			<cmd do="AddEntry"/>
+			<cmd do="GetParent"/>
+			<cmd do="template">
+				<param name="template_name">view_entry.vt</param>
+			</cmd>
+		</request>
+		<request name="save_modified_entry">
+		    <cmd group="nav"/>
+			<cmd do="ModifyEntry"/>
+			<cmd do="GetParent"/>
+			<cmd do="template">
+				<param name="template_name">view_entry.vt</param>
+			</cmd>
+		</request>
+		<request name="entry">
+		    <cmd group="nav"/>
+			<cmd do="ViewEntry"/>
+			<cmd do="GetParent"/>
+			<cmd do="template">
+				<param name="template_name">view_entry.vt</param>
+			</cmd>
+		</request>
+		<request name="entries">
+		    <cmd group="nav"/>
+			<!--  cmd do="ListEntries"/ -->
+			<cmd do="template">
+				<param name="template_name">list_entries.vt</param>
+			</cmd>
+		</request>
+		
+		<request name="monthly_status_report">
+			<cmd group="nav"/>
+			<cmd do="MonthlyStatusReport"/>
+			<cmd do="template">
+				<param name="template_name">monthly_status_report.vt</param>
+			</cmd>
+		</request>
+		<request name="monthly_status_report_plain">
+			<cmd group="nav"/>
+			<cmd do="MonthlyStatusReport"/>
+			<cmd do="template">
+				<param name="template_name">monthly_status_report_plain.vt</param>
+			</cmd>
+		</request>
+	</requests>
+</commands>

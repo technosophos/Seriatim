@@ -1,0 +1,103 @@
+#**
+Navigation.
+
+Macros that must be defined:
+
+
+This uses the following variables:
+$isLoggedIn
+
+@author mbutcher
+*#
+<ul id="navmenu" style="width:200px;">
+#if($isLoggedIn)
+  <li>
+    <h3 class="menuHeader">Reports</h3>
+    <ul>
+      <li>
+      <a href="$absolute_uri/monthly_status_report">Month to Date</a>
+      </li>
+      <li>
+      <a href="$absolute_uri/monthly_status_report?month=-1">Hours Last Month</a>
+      </li>
+      <li>
+      Customer Report
+      </li>
+      <li>
+      Yearly Update
+      </li>
+    </ul>
+  </li>
+  <li>
+    <h3 class="menuHeader">Recent Entries</h3>
+    <ul>
+    #foreach($entry in $ListEntries)
+      <li>
+      <a href="$absolute_uri/entry?doc=$entry.DocID">$entry.getMetadatum('title').FirstValue</a> 
+      </li>
+    #end
+    </ul>
+  </li>
+  <li>
+    <h3 class="menuHeader">Projects</h3>
+  
+    <ul>
+    #foreach($project in $ListProjects)
+      <li>
+      <a href="$absolute_uri/project?doc=$project.DocID"
+        >$project.getMetadatum('title').FirstValue</a>
+        &nbsp;<a href="$absolute_uri/create_entry?doc=$project.DocID" 
+        	style="text-decoration:none; color:gray">[+]</a>
+      </li>
+    #end
+    </ul>
+  </li>
+
+  <li>
+    <h3 class="menuHeader">Time Entries</h3>
+    <ul>
+      <li>
+      Hours so far this month.
+      </li>
+      <li>
+      Hours last month
+      </li>
+      <li>
+      Hours by customer
+      </li>
+      <li>
+      Yearly Update
+      </li>
+    </ul>
+  </li>
+  <li>
+  <h3 class="menuHeader">Administration</h3>
+    <ul>
+      <li>
+      Erase everything.
+      </li>
+      <li>
+      View users
+      </li>
+      <li>
+      Rebuild index
+      </li>
+      <li>
+      Export database
+      </li>
+    </ul>
+  </li>  
+#else
+  <li>
+    <h3 class="menuHeader">Login</h3>
+    <p>You must login before using Seriatim.</p>
+  </li>
+#end
+</ul>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#navmenu').accordion({
+    header: 'h3.menuHeader',
+  });
+});
+</script>

@@ -1,0 +1,77 @@
+#set($short_title="Seriatim")
+#set($title="The <strong>Seriatim</strong> Time Tracker")
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Welcome to $title</title>
+</head>
+<body>
+<h1>Welcome to $title</h1>
+#if ($rerouterequest)
+	<p>You have been re-routed from another page because $short_title is not installed yet.</p>
+#end
+<p>You are now beginning the installation procedure for $short_title.</p>
+<p>Server root: $app_url<br/>
+</p>
+
+#if($ERRORS.containsKey("VerifyEnv"))
+	<h2>Error</h2>
+	<p><strong>Error:</strong> $ERRORS.get("VerifyEnv")</p>
+	<p>You will need to fix errors before proceeding with the install.</p>p>
+#else
+	<h2>Verification</h2>
+	<h3>The following locations will be used:</h3>
+	<ul>
+	<li>Base application: $app_path.</li>
+	<li>Static files (CSS, images): $resource_path</li>
+	<li>Configuration files: $config_path</li>
+	</ul>
+	<h3>The following locations will be created:</h3>
+	<ul>
+	<li>Repository: $fs_repo_path</li>
+	<li>Index: $index_path</li>
+	</ul>
+	<p>You may need to edit the web application's web.xml file to change the 
+	location of the repository or index.</p>
+
+#end
+
+#if($ERRORS.containsKey("InstallBase"))
+	<h2>Error</h2>
+	<p><strong>Error:</strong> $ERRORS.get("InstallBase")</p>
+	<p>You will need to fix errors, and then <a href="$absolute_uri/install">restart the installation</a>.</p>
+#else
+	<p>A new $short_title repository is now configured. Here are the details:</p>
+	<ul>
+		<li>$repo_create</li>
+		<li>$index_create</li>
+		<li>$settings_repo_create</li>
+	</ul>
+	
+	<h2>Create a New User</h2>
+<p>It is time to create a user. This first user will have special permissions in
+$short_title to perform maintenance tasks, backups, and so on.</p>
+<form action="$absolute_uri/install2" method="post">
+	<label for="username">User Name:</label>
+	<input type="text" name="username" id="username" value="admin" />
+	<br/>
+	<label for="password">Password:</label>
+	<input type="password" id="password" name="password" /><br/>
+	<label for="password_verify">Verify Password:</label>
+	<input type="password" name="password_verify" id="password_verify" /><br/>
+	<input type="submit" value="Create User" /><br/>
+	<label for="gn">First Name:</label>
+	<input type="text" name="gn" id="gn" />
+	<br/>
+	<label for="sn">Last Name:</label>
+	<input type="text" name="sn" id="sn" value="Admin" />
+	<br/>
+	<label for="email">Email:</label>
+	<input type="text" name="email" id="email"/>
+	<br/>
+</form>
+#end
+</body>
+</html>

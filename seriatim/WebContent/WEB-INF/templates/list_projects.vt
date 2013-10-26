@@ -1,0 +1,14 @@
+#set($title="Projects")
+#macro(content)
+<h1>$!title</h1>
+<ul>
+#foreach($project in $ListProjects)
+  <li><a href="$absolute_uri/project?doc=$project.DocID">
+  $project.getMetadatum('title').FirstValue</a></li>
+#end
+</ul>
+<p>
+  <a href="$absolute_uri/create_project">&raquo;New Project</a>
+</p>
+#end
+#parse('frag/main.vt')

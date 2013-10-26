@@ -1,0 +1,277 @@
+/*
+ * Element styles
+ */
+
+h2 {
+	padding: 0px;
+	margin: 0px;
+}
+
+body {
+	/*font-family: sans-serif;*/
+	font-family: Times New Roman, Times, serif;
+	margin:0px;
+	padding: 0px;
+	/*background-color: #e0ebf8;*/
+	/*background-color: red;*/
+}
+
+
+
+li.navItem a {
+	text-decoration: none;
+}
+
+li.navItem a:hover {
+	text-decoration: underline;
+}
+
+ul.linear-list {
+	margin: 0px;
+	padding: 0px;
+	margin-bottom: 30px;
+	/*clear: both;*/
+}
+ul.linear-list li {
+	display: block;
+	float: left;
+	margin-right: 15px;
+}
+li.linear-list-header {
+	font-weight: bold;
+}
+
+.box {
+	border: 2px dashed #ccc;
+	padding: 3px;
+	margin: 5px;	
+}
+
+table.entryDetails th {
+	text-align: right;
+	background-color: #eee;
+	padding: 4px;	
+}
+
+table.entryDetails td {
+	padding: 4px;
+}
+
+/* LEFT OVER FROM LANTERN */
+
+/* BLOCKS
+ * Items in Blocks1 menu:
+ */
+ul.blocks1_list {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+/*ul.blocks1_list li {
+	background-color: white;
+}*/
+
+h3.blocks1_title {
+	color:#000/*#608ac3*/;	
+	text-align: center;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+	padding-top: 15px;
+}
+
+.blocks1_content {
+	background-color: white;/*#fff7e8;*/
+	/*border-left: 1px dashed orange;
+	border-right: 1px dashed orange;*/
+	padding: 0px 5px 0px 5px;	
+}
+
+.blocks1_header {
+	background-image: url($resource_uri/img/tab_orange_top-250x46.png);
+	height: 46px;
+}
+.blocks1_footer {
+	background-image: url($resource_uri/img/tab_orange_bottom-250x50.png);
+	height: 50px;
+}
+
+/*
+ * TABLES
+ * Table that functions as content listing:
+ */
+table.content_listing {
+	border-left: 1px solid #608ac3;
+	border-right: 1px solid #608ac3;
+}
+table.content_listing caption {
+	font-weight: bold;
+	text-align: left;
+	padding-left: 15px;
+	color: #608ac3;	
+}
+table.content_listing tfoot {
+	/*background-color:#eee;*/
+	background-color:#ffbf43;
+}
+tr.content_listing_header {
+	color: #000;/*#608ac3;*/
+	border: 3px solid #608ac3;
+	/*background-color: #eee;*/
+	/*background-color:#fec;*/	
+}
+tr.content_listing_header th {
+	padding: 5px 0px 5px 0px;
+	border-bottom: 3px double #608ac3;
+}
+tr.content_listing_item td {
+	padding-left: 3px;
+}
+
+tr.content_listing_item:hover {
+	background-color: #ffdb96;	
+}
+/*
+td.content_listing_link:hover {	
+	background-color:#ffbf43;
+	text-decoration: underline;
+}
+*/
+
+label.required-field {
+	color: red;
+	font-weight: bold;
+}
+
+/*
+ * ID-specific styles:
+ * These should be in order from top of the page to bottom of the page.
+ */
+
+#headerBox {
+	/*border-bottom: 5px double #608ac3;*/ /*#608ac3;*/
+	width: 100%;
+	height: 105px;
+	background-color: #fff;
+}
+#logo {
+	float: left;
+	padding-left: 15px;
+	padding-right: 10px;
+	vertical-align: bottom;
+	position: relative;
+	top: 2px;
+	left: 4px;
+}
+#searchForm {
+	padding: 0px;
+	margin: 0px;
+
+}
+
+#blocks1 {
+	float: right;
+	position: relative;	
+	width: 250px;
+	margin: 5px;
+	/*border: 3px double red;
+	background-color:#e0ebf8;*/
+}
+
+
+/* ###########################
+ * FORMS
+ */
+ul.lform {
+	margin: 1em;
+	padding: 0px;
+	list-style: none;
+}
+li.lform_item {
+	padding-bottom: 5px;
+}
+li.lform_item label { 
+	font-weight: bold;
+	display: block;
+}
+
+/* ###########################3
+ * UNCLEANSED
+ */
+#loginPane {
+	display: none;
+	position: fixed;
+	top: 0px;
+	left: 33%;
+	width: 33%;
+	/*float:left;*/
+	background-color: #d0eccd;
+}
+
+/**
+ * Misc Classes:
+ */
+.subsectionTitle {
+
+}
+.helptext {
+	font-size: 10pt;
+	color: #608ac3;
+	padding: 0px 0px 0px 15px;
+	
+}
+.small {
+	font-size: 10pt;
+}
+.unimportant {
+	color:gray;	
+}
+.error {
+	background-color: #fcc;
+	border: 1px solid #f99;
+	padding: 7px;	
+}
+
+a.tag {
+	text-decoration: none;
+	/*vertical-align: middle;*/	
+}
+
+a.tag:hover {
+	text-decoration: underline;	
+}
+
+a.top-tag {
+	font-size: 18pt;
+	font-weight: bold;	
+}
+a.middle-tag {
+	font-size: 14pt;
+	font-weight: bold;
+}
+a.low-tag {
+	font-size: 12pt;
+}
+
+legend{}
+
+ol.form-list {
+	list-style: none;	
+}
+li.form-item {
+	padding-bottom: 5px;
+}
+label.standard-label {
+	font-size: 10pt;
+	font-weight: bold;
+	display: block;
+}
+
+input.title-field {
+	font-weight: bold;
+	font-size: 14pt;	
+}
+
+input.standard-field {
+	font-size: 10pt;
+}

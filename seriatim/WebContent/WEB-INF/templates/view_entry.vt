@@ -1,0 +1,37 @@
+#if($AddEntry)#set($ViewEntry=$AddEntry)#end
+#if($modifyEntry)#set($ViewEntry=$ModifyEntry)#end 
+
+#set($title=$ViewEntry.getMetadatum('title').FirstValue)
+#set($parentID = $GetParent.get(0).DocID)
+#set($parentTitle = $GetParent.get(0).getMetadatum('title').FirstValue)
+
+#macro(content)
+	<h1>$title</h1>
+	<table class="entryDetails">
+	<tr>
+		<th>Hours</th>
+		<td>$!ViewEntry.getMetadatum('time').FirstValue</td>
+	</tr>
+	<tr>
+		<th>Date</th>
+		<td>$!tpl.ts2Date($ViewEntry.getMetadatum('date').FirstValue, 'MM/dd/yyyy')</td>
+	</tr>
+	<tr>
+		<th>Project</th>
+		<td><a href="$absolute_uri/project?doc=$!parentID">$!parentTitle</a></td>
+	</tr>
+	</table>
+	<h3>Description</h3>
+	<div id="bodySection" class="box">
+	$ViewEntry.Data
+	</div>
+	<h3>Notes</h3>
+	<div id="notesSection" class="box">
+	$!ViewEntry.getMetadatum('note').FirstValue
+	</div>
+	<div class="entryToolbar">
+	<a href="$absolute_uri/modify_entry?doc=$ViewEntry.DocID">&raquo; Edit</a>
+	</div>
+	
+#end
+#parse('frag/main.vt')

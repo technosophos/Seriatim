@@ -1,0 +1,13 @@
+#set($title="Recent Entries")
+#macro(content)
+	<h1>$title</h1>
+	<ol>
+	#foreach($entry in $ListEntries)
+		<li><a href="$absolute_uri/entry?doc=$entry.DocID"
+			 >$entry.getMetadatum('title').FirstValue</a>
+			 ($entry.getMetadatum('time').FirstValue)</li>
+
+	#end
+	</ol>
+#end
+#parse('frag/main.vt')

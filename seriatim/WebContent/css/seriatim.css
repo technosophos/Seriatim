@@ -1,0 +1,130 @@
+#toolbar {
+	float:right;
+	position:fixed;
+	top: 3px;
+	right: 5px;
+}
+#logosection {
+	float: left;
+	
+}
+div.blankrule {
+	display: block;
+	clear: both;
+	/*border: 1px solid red;*/
+	border-bottom: 2px solid #608AC3;
+}
+
+#navigation {
+ display: block;
+ float: left;	
+}
+
+#navmenu {
+  float:left;
+  list-style: none;
+  padding-left: 0px;
+  margin-left: 5px;
+}
+
+#navmenu > li > h3 {
+  display: block;
+  background-color: #E0EBF8;
+  border: 1px solid #E0EBF8;
+  text-decoration: None;
+  color: #608AC3;
+  font-weight: bold;
+  padding: 3px 5px 0px 5px;
+  margin: 0px;
+  margin-bottom: 4px;
+  list-style: none;
+  font-size: 12px;
+}
+
+#navmenu > li > h3:hover {
+  display: block;
+  background-color: #E0EBF8;
+  border: 1px solid #608AC3;
+}
+
+#centralBox {
+	margin: 0px;
+	padding: 0px;
+	padding-top: 2px;
+	padding-bottom: 45px;
+	margin-left: 205px;
+	background-color: white;/*#e0ebf8;#ede3d6;*/
+	background-repeat: repeat-x;
+	margin-top: 0px;
+	/*float: left;*/
+	/*padding-top: 10px;*/	
+}
+
+#bodyPane {
+	padding-left: 22px;
+	padding-top: 5px;
+	padding-bottom: 15px;
+	/*float: left;*/
+	/*clear: right;*/
+}
+
+#footerBox {
+	margin: 0px;
+	clear: both;
+	font-size: 10px;
+	color: gray;
+	padding: 0px;
+	padding-left: 5px;
+	height: 46px;
+	line-height: 24px;
+	text-align: right;
+	background-color: #e0ebf8;
+	position: relative;
+	/*bottom: 0px;*/
+}
+
+a {
+	/*color: #06C*/
+	color: #608ac3;
+}
+
+img {
+	border: 0px;
+}
+
+ul.formlist {
+	list-style: none;
+	padding: 0px;
+	margin: 3px;
+}
+
+ul.formlist > li {
+	padding-bottom: 9px;
+}
+
+ul.formlist label {
+	margin-left: 5px;
+}
+
+ul.formlist label:first {
+	text-decoration: underline;
+}
+
+input[type=text], select, textarea, input[type=password], input[type=checkbox] {
+  border: 1px solid #608AC3;	
+}
+
+label {
+ display: block; 
+}
+
+.reportHeader {
+	text-align: center;	
+}
+
+/*
+ * Override calendar styles:
+ */
+.datepicker_control {
+	background-color: #608AC3;
+}

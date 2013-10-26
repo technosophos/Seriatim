@@ -1,0 +1,25 @@
+#**
+This fragment creates a login form.
+Variables:
+$action: Form action (URL)
+$next_request: Name of page to forward to if login is successful.
+
+@author mbutcher
+*#
+<form method="post" action="$!action">
+<fieldset>
+	<ul class="lform">
+		<li class="lform_item">
+			<label for="auth-uid">User: </label>
+			<input type="text" name="auth-uid" id="auth-uid" size="60"/>
+		</li>
+		<li class="lform_item">
+			<label for="auth-passwd">Password: </label>
+			<input type="password" name="auth-passwd" id="auth-passwd" size="60"/>
+		</li>
+	</ul>
+	<input type="hidden" name="auth-next_request" value="$!next_request" />
+	<input type="submit" value="    Login    "/>
+</fieldset>
+<p><a href="$absolute_uri/create_user">Create an account</a></p>
+</form>

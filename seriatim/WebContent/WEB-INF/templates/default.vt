@@ -1,0 +1,28 @@
+#set($title="Seriatim Time Tracker")
+
+#macro(content)
+<h1>Welcome to Seriatim</h1>
+<ul>
+  #if($tpl.ne($ListProjects))
+  <li>
+  <form action="$absolute_uri/create_entry" id="createEntry">
+  Create a new time entry for 
+  <select name="doc" id="entrySelector">
+    <option selected="selected" style="color:navy">&darr;Choose One&darr;</option>
+    #foreach($project in $ListProjects)
+    <option value="$project.DocID">$project.getMetadatum('title').FirstValue</option>
+    #end
+  </select>
+  </form>
+  <script type="text/javascript">
+  $("#entrySelector").change(function(e){$("#createEntry").submit();});
+  </script>
+  <li>
+  #end
+  <li><a href="$absolute_uri/projects">View Projects</a></li>
+  <li><a href="$absolute_uri/create_project">Create a New Project</a></li>
+  <li>Run Reports</li>
+  <li></li>
+</ul>
+#end
+#parse('frag/main.vt')

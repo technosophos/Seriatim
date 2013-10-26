@@ -1,0 +1,158 @@
+<html>
+<head>
+  <title>Seriatim</title>
+  <link rel="stylesheet" type="text/css" href="datepicker/core/ui.datepicker.css"/>
+  <link rel="stylesheet" type="text/css" href="css/seriatim.css"/>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/jquery.ui.js"></script>
+  <script type="text/javascript" src="js/seriatim.js"></script>
+  <script type="text/javascript">
+    $('document').ready(function() {
+      $('#date').datepicker({ 
+        showOn: 'both', 
+        showOtherMonths: true, 
+        showWeeks: true, 
+        firstDay: 1, 
+        changeFirstDay: false,
+        buttonImageOnly: true, 
+        buttonImage: 'datepicker/img/calendar2.gif'
+      });
+      $('#navmenu').accordion();
+    });
+  </script>  
+</head>
+<body>
+<div id="logosection">
+[Insert Logo Here]
+</div>
+<div id="toolbar">
+	<form method="GET" action="search">
+		<input type="text" name="q" size="15" id="q"/>
+		<input type="submit" value="Search"/>
+	</form>
+</div>
+<div class="blankrule">
+</div>
+<div id="navigation">
+<ul id="navmenu" style="width:200px;">
+  <li>
+    <a href="#">Recent Entries</a>
+    <ul>
+      <li>
+      Entry 
+      </li>
+      <li>
+      Entry 
+      </li>
+      <li>
+      Entry 
+      </li>
+      <li>
+      Entry 
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="#">Projects</a>
+  
+    <ul>
+      <li>
+      Comany A 
+      </li>
+      <li>
+      Comany B
+      </li>
+      <li>
+      Another Company
+      </li>
+      <li>
+      Yet another company
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="#">Reports</a>
+    <ul>
+      <li>
+      Hours so far this month.
+      </li>
+      <li>
+      Hours last month
+      </li>
+      <li>
+      Hours by customer
+      </li>
+      <li>
+      Yearly Update
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="#">Time Entries</a>
+    <ul>
+      <li>
+      Hours so far this month.
+      </li>
+      <li>
+      Hours last month
+      </li>
+      <li>
+      Hours by customer
+      </li>
+      <li>
+      Yearly Update
+      </li>
+    </ul>
+  </li>
+  <li>
+  <a href="#">Administration</a>
+    <ul>
+      <li>
+      Erase everything.
+      </li>
+      <li>
+      View users
+      </li>
+      <li>
+      Rebuild index
+      </li>
+      <li>
+      Export database
+      </li>
+    </ul>
+  </li>  
+</ul>
+</div>
+  <div id="content">
+  <h1>Time Entry</h1>
+  <form>
+    <ul class="formlist">
+      <li>
+        <label for="date">Date:</label>
+        <input type="text" name="date" id="date" size="12"/>
+      </li>
+      <li>
+        <label for="hours">Number of Hours:</label>
+        <input type="text" name="hours" id="hours" size="12"/>
+      </li>
+      <li>
+        <label for="title">Title:</label>
+        <input type="text" name="title"/>
+      </li>
+      <li>
+        <label for="short_desc">Short Description</label>
+        <textarea name="short_desc" cols="60"></textarea>
+      </li>
+      <li>
+        <label for="long_desc">Long Description</label>
+        <textarea name="long_desc" cols="60"></textarea>
+      </li>
+    </ul>
+  </form>
+</div>
+<div class="blankrule"></div>
+<div id="footer">
+Copyright &copy; 2008, Aleph-Null, Inc.
+</div>
+</body>
+</html>

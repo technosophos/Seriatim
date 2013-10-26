@@ -1,0 +1,163 @@
+#**
+Standard template for XHTML-based output.
+
+Macros that must be defined:
+#content(): Main body content.
+
+
+This sets the following variables:
+$isLoggedIn: True if a user is logged in, false otherwise.
+
+@author mbutcher
+*#
+#set($debug = 1)
+#set( $isLoggedIn = $_session.userLoggedIn() )
+
+## To add your own, create an array called $customJS.
+#set($jslibs = [
+	"$resource_uri/js/jquery.js",
+	"$resource_uri/js/jquery.ui.js",
+	"$resource_uri/js/seriatim.js"
+])
+
+## To add your own CSS, create an array called $customCSS.
+## Note that datepicker comes first so that seriatim can override it.
+#set($csslibs = [
+  "$resource_uri/datepicker/core/ui.datepicker.css",
+  "$resource_uri/css/main.css",
+  "$resource_uri/css/seriatim.css"
+])
+
+## Turn on editor
+#if($useEditor)
+	#set($junk = $jslibs.add("$resource_uri/js/tiny_mce/tiny_mce.js"))
+#end
+## Add custom JS
+#if($tpl.ne($customJS) && $customJS.size() > 0)
+	#foreach($lib in $customJS)
+		#set($junk = $jslibs.add($lib))
+	#end
+#end
+## Add custom CSS
+#if($tpl.ne($customCSS) && $customCSS.size() > 0)
+    #foreach($lib in $customCSS)
+    	#set($junk = $csslibs.add($lib))
+    #end
+#end
+#*
+Extra navigational areas:
+*#
+#if(!$blocks1)#set( $blocks1 = [])#end
+#if($isLoggedIn)
+	#if(!$title) #set( $title = 'Seriatim Time Tracker') #end
+	#if(!$selectedTab) #set( $selectedTab = 'Home') #end
+	#if(!$menuitems) 
+		#set($menuitems = {
+			"Home": "${absolute_uri}/default",
+			"Logout": "${absolute_uri}/logout",
+			"About Us": "${absolute_uri}/default"
+		})
+		#set($menuorder = ['Home','About Us','Logout']) 
+	#end
+	#set($taborder = ['Projects','Entries','Reports'] )
+	#set($tabs = {
+		'Projects': "${absolute_uri}/projects",
+		'Reports': "${absolute_uri}/reports",
+		'Entries': "${absolute_uri}/entries"
+	})
+	
+#else 
+	#set($title = "Login")
+	#set($menuitems = {"login": "${absolute_uri}/login"})
+	#set($taborder = []) ## No tabs
+	#set($blocks1 = [])
+#end
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>$!title</title>
+#foreach($css in $csslibs)
+<link href="$css" type="text/css" rel="stylesheet"/>
+#end
+#foreach($js in $jslibs)
+<script type="text/javascript" lang="Javascript" src="$js">/* */</script>
+#end
+#if($useEditor)#parse('frag/editor.vt')#end
+</head>
+<body>
+<div id="headerBox">
+	<div id="logosection">
+	<a href="$absolute_uri"><img id="logo" src="$resource_uri/img/Seriatim.png"/></a>
+	</div>
+	<div id="toolbar">
+	<form action="$absolute_uri/search" id="searchForm">
+		<input type="text" id="searchBox" class="secondaryForm" name="q"/>
+		<input type="submit" value="Search"/>
+		#if($isLoggedIn)
+		<br/><strong>$_session.getUserName()</strong>
+		[ <a href="#">my account</a> |
+		<a href="$absolute_uri/logout">logout</a> ]
+		#end
+	</form>
+	</div>
+</div>
+<div class="blankrule"></div>
+<div id="navigation">
+#parse('frag/accordion.vt')
+</div>
+<div id="centralBox">
+	#if($blocks1.size() > 0)
+	<div id="blocks1">
+		<ul class="blocks1_list">
+		#foreach($item in $blocks1)
+			<li>
+			<div class="blocks1_header">
+			#if($item.containsKey('title'))
+			<h3 class="blocks1_title">$item.get('title')</h3>
+			#end
+			</div>
+			<div class="blocks1_content">
+			$!item.get('content')
+			</div>
+			<div class="blocks1_footer">&nbsp;</div>
+			</li>
+		#end
+		</ul>
+	</div>
+	#end
+	<div id="bodyPane">
+		#if($isLoggedIn)
+			#if($ERRORS.size() > 0)
+	  			#set($keys = $ERRORS.keySet())
+	  			#foreach($key in $keys)
+	  				#set($err=$ERRORS.get($key))
+	  				<div class="error">
+	  				$err.getFriendlyErrorMessage()
+	  				</div>
+	  				#if($debug)
+	  				<div style="border: 1px solid green">
+	  				$err.getErrorMessage()
+	  				</div>
+	  				#end
+	  			#end
+			#end
+			#content()
+		#else
+			<p>Enter your username and password.</p>
+			#set( $action="${absolute_uri}/login" )
+			#set( $next_request="default")
+			#parse("frag/login_form.vt")
+		#end
+	</div>
+</div>
+<div class="blankrule"></div>
+<div id="footerBox">
+
+Seriatim Time Tracker Copyright &copy; 2008 
+<a href="http://aleph-null.tv">Aleph-Null, Inc.</a>. 
+
+</div>
+</body>
+</html>
